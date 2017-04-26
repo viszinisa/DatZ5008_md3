@@ -1,0 +1,24 @@
+<div class="row">
+	<div class="form-group">
+		<label class="control-label" for="filtrs">Filtrēt nosaukumu</label>
+		<input type="text" class="form-control" id="filtrs" name="filtrs" placeholder="Vārds" required maxlength="50" [(ngModel)]="filtrs" #filtrsModel="ngModel">
+	</div>
+</div>
+<div class="row">
+	<div class="col-md-offset-3 col-md-6">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>ISO2</th>
+					<th>Nosaukums</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let item of items | filter : filtrs">
+					<td>{{ item.code | lowercase }}</td>
+					<td>{{ item.name | uppercase }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

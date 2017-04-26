@@ -1,0 +1,40 @@
+<h2>Forma un validācija</h2>
+<form  (ngSubmit)="onSubmit()">
+	<div [ngClass]="{'form-group':true, 'has-error': vardsModel.errors && (vardsModel.dirty || vardsModel.touched || submitted)}">
+		<label class="control-label" for="vards">Ievadi vārdu</label>
+		<input type="text" class="form-control" id="vards" name="vards" placeholder="Vārds" required maxlength="50" [(ngModel)]="vards" #vardsModel="ngModel">
+	</div>
+	<div *ngIf="vardsModel.errors && (vardsModel.dirty || vardsModel.touched || submitted)" class="alert alert-danger" role="alert">
+		<strong>Kļūda</strong>
+		<div [hidden]="!vardsModel.errors.required">
+			Ievadiet vārdu
+		</div>
+		<div [hidden]="!vardsModel.errors.maxlength">
+			Vārds nedrīkst būt garāks kā 50 simboli
+		</div>
+	</div>
+	<div [ngClass]="{'form-group':true, 'has-error': (horoskopsModel.errors || horoskopsModel.value==0 || submitted) && (horoskopsModel.dirty || horoskopsModel.touched)}">
+		<label class="control-label" for="horoskops">Horoskops</label>
+		<select class="form-control" name="horoskops" required [(ngModel)]="horoskops" #horoskopsModel="ngModel">
+			<option value="0">Izvēlies</option>
+			<option value="1">Zaķis</option>
+			<option value="2">Vilks</option>
+			<option value="3">Lapsa</option>
+			<option value="4">Āpsis</option>
+		</select>
+	</div>
+	<div *ngIf="(horoskopsModel.errors || horoskopsModel.value==0) && (horoskopsModel.dirty || horoskopsModel.touched || submitted)" class="alert alert-danger" role="alert">
+		<strong>Kļūda</strong>
+		Izvēlieties horoskopu
+	</div>
+	<div class="checkbox">
+		<label>
+			<input type="checkbox" name="ticu" [(ngModel)]="ticu" #ticuModel="ngModel"> Es ticu
+		</label>
+	</div>
+	<div *ngIf="!ticuModel.value && (ticuModel.dirty || ticuModel.touched || submitted)" class="alert alert-danger" role="alert">
+		<strong>Kļūda</strong>
+		Tev ir jātic
+	</div>
+	<button type="submit" class="btn btn-primary btn-lg btn-block">Submit</button>
+</form>
